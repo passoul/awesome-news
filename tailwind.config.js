@@ -20,7 +20,11 @@ module.exports = {
       fontFamily: {
         'body': ['Helvetica Neue', 'Arial', 'Noto Sans']
       },
-    }
+    },
+    container: {
+      center: true,
+      padding: "1.5rem",
+    },
   },
   plugins: [],
   future: {

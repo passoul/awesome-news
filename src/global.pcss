@@ -2,6 +2,93 @@
 @import "tailwindcss/components";
 @import "tailwindcss/utilities";
 
+/**
+* Adding Base Styles
+*/
+@layer base {
+  .body{
+    @apply font-body text-lg text-black;
+  }
+  .body-bold{
+    @apply body font-bold; 
+  }
+  .description{
+    @apply body text-base;
+  }
+  .title-category{
+    @apply body-bold text-base text-white;
+  }
+  .title-channel{
+    @apply body-bold text-2xl text-white;
+  }
+  .title-thumbnail{
+    @apply body text-base text-white;
+  }
+}
+
+/**
+* We need a CSS reset since we have to override the browser's default styling
+*/
+html, body, div, span, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+abbr, address, cite, code,
+del, dfn, em, img, ins, kbd, q, samp,
+small, strong, sub, sup, var,
+b, i,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, figcaption, figure,
+footer, header, hgroup, menu, nav, section, summary,
+time, mark, audio, video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  outline: 0;
+  font-size: 100%;
+  vertical-align: baseline;
+  background: transparent;
+}
+
+article,aside,details,figcaption,figure,
+footer,header,hgroup,menu,nav,section {
+  display: block;
+}
+
+nav ul {
+  list-style :none;
+}
+
+blockquote, q {
+  quotes: none;
+}
+
+blockquote:before, blockquote:after,
+q:before, q:after {
+  content: '';
+  content: none;
+}
+
+a {
+  margin: 0;
+  padding: 0;
+  font-size: 100%;
+  vertical-align: baseline;
+  background: transparent;
+}
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+input, select {
+  vertical-align :middle;
+}
+
+/**
+* Awesome news app
+*/
 body {
-  @apply font-mono;
+  @apply body;
 }

@@ -1,4 +1,9 @@
 <script>
+	import { navLinks } from '../store/store';
+	import { NAV_LINKS_EMPTY } from '../store/const';
+	import { faNewspaper } from '@fortawesome/free-solid-svg-icons';
+	import { FontAwesomeIcon } from 'fontawesome-svelte';
+
 	export let segment;
 </script>
 
@@ -49,12 +54,19 @@
 </style>
 
 <nav>
+	<div>
+		<a href="/">
+			<FontAwesomeIcon icon={faNewspaper} />
+			<div>Awesome News</div>
+		</a>
+	</div>
+	{#if $navLinks.length > 0}	
 	<ul>
-		<li><a aria-current="{segment === undefined ? 'page' : undefined}" href=".">home</a></li>
-		<li><a aria-current="{segment === 'about' ? 'page' : undefined}" href="about">about</a></li>
-
-		<!-- for the blog link, we're using rel=prefetch so that Sapper prefetches
-		     the blog data when we hover over the link or tap it on a touchscreen -->
-		<li><a rel=prefetch aria-current="{segment === 'blog' ? 'page' : undefined}" href="blog">blog</a></li>
+		{#each $navLinks as { href, label }, i}
+			<li><a href="{ href }" aria-current="{segment === href ? 'page' : undefined}">{ label }</a></li>
+		{/each}
 	</ul>
+	{:else}
+		<p class="py-4">{ NAV_LINKS_EMPTY }</p>
+	{/if}
 </nav>
