@@ -1,5 +1,5 @@
 <style lang="postcss">
-	h1, figure, p {
+	/* h1, figure, p {
 		@apply text-center my-0 mx-auto;
 	}
 
@@ -23,7 +23,7 @@
 		h1 {
 			@apply text-5xl;
 		}
-	}
+	} */
 </style>
 
 <svelte:head>
