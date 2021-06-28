@@ -1,72 +1,40 @@
 <script>
-	import { navLinks } from '../store/store';
+	import { navLinks } from '../store/data';
 	import { NAV_LINKS_EMPTY } from '../store/const';
 	import { faNewspaper } from '@fortawesome/free-solid-svg-icons';
 	import { FontAwesomeIcon } from 'fontawesome-svelte';
+	import { navBarClass, navBarContentWrapperClass, navBarLinkClass, navLinksUlClass } from '../store/styleConst'
 
 	export let segment;
 </script>
 
 <style>
-	nav {
-		border-bottom: 1px solid rgba(255,62,0,0.1);
-		font-weight: 300;
-		padding: 0 1em;
-	}
-
-	ul {
-		margin: 0;
-		padding: 0;
-	}
-
-	/* clearfix */
-	ul::after {
-		content: '';
-		display: block;
-		clear: both;
-	}
-
-	li {
-		display: block;
-		float: left;
-	}
-
 	[aria-current] {
-		position: relative;
-		display: inline-block;
+		@apply relative;
 	}
 
 	[aria-current]::after {
-		position: absolute;
+		@apply absolute h-0.5 block bg-purple-500 -bottom-px;
 		content: '';
-		width: calc(100% - 1em);
-		height: 2px;
-		background-color: rgb(255,62,0);
-		display: block;
-		bottom: -1px;
-	}
-
-	a {
-		text-decoration: none;
-		padding: 1em 0.5em;
-		display: block;
+		width: calc(100% - 1rem);
 	}
 </style>
 
-<nav>
-	<div>
-		<a href="/">
+<nav class="{navBarClass}">
+	<div class="{navBarContentWrapperClass}">
+		<a href="/" class="{navBarLinkClass}">
 			<FontAwesomeIcon icon={faNewspaper} />
-			<div>Awesome News</div>
+			<span class="ml-2">Awesome News</span>
 		</a>
+		{#if navLinks.length > 0}
+		<ul class={navLinksUlClass}>
+			{#each navLinks as { href, label } (href)}
+				<li><a href="{ href }" aria-current="{segment === href ? 'page' : undefined}" class="{navBarLinkClass}">{ label }</a></li>
+			{/each}
+			<li><a rel=prefetch aria-current="{segment === 'blog' ? 'page' : undefined}" href="blog">blog</a></li>
+		</ul>
+		{:else}
+			<p class="py-4">{ NAV_LINKS_EMPTY }</p>
+		{/if}
 	</div>
-	{#if $navLinks.length > 0}	
-	<ul>
-		{#each $navLinks as { href, label }, i}
-			<li><a href="{ href }" aria-current="{segment === href ? 'page' : undefined}">{ label }</a></li>
-		{/each}
-	</ul>
-	{:else}
-		<p class="py-4">{ NAV_LINKS_EMPTY }</p>
-	{/if}
 </nav>

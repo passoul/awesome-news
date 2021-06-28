@@ -1,0 +1,2 @@
+export const GET_CATS_LIST = 'GET_CATS_LIST';
+export const GET_CAT_POSTS_LIST = 'GET_CAT_POSTS_LIST';

@@ -1,40 +1,37 @@
-<style lang="postcss">
-	/* h1, figure, p {
-		@apply text-center my-0 mx-auto;
+<script context="module">
+	export function preload() {
+		return this.fetch(`index.json`).then(r => r.json()).then(posts => {
+			return { posts };
+		});
 	}
+</script>
+<script>
+	import { getCatsList } from '../actions/action';
+	import { LOADING_TEXT } from '../store/const'; 
+	import PostCard from '../components/PostCard.svelte'
+	import { newGridClass, postCardThumbnailClass, postCardTitleClass } from '../store/styleConst'; 
+	export let posts;
+	// Get all categories from posts
+	const cats = getCatsList(posts);
 
-	h1 {
-		@apply text-3xl uppercase font-bold m-0 mb-4 text-orange-500 font-sans;
-	}
+    console.log("🚀 ~ file: index.svelte ~ line 13 ~ cats", cats)
 	
-	figure {
-		@apply m-0 mb-4;
-	}
-	
-	img {
-		@apply w-full max-w-5xl m-0 mb-4;
-	}
-	
-	p {
-		@apply my-0 mx-auto;
-	}
-
-	@screen md {
-		h1 {
-			@apply text-5xl;
-		}
-	} */
-</style>
-
+</script>
 <svelte:head>
-	<title>Sapper project template</title>
+	<title>News Categories</title>
 </svelte:head>
 
-<h1>Great success!</h1>
-
-<figure>
-	<img alt='Success Kid' src='successkid.jpg'>
-	<figcaption>Have fun with Sapper!</figcaption>
-</figure>
-
-<p><strong>Try editing this file (src/routes/index.svelte) to test live reloading.</strong></p>
+{#await cats}
+	<p>{LOADING_TEXT}</p>
+{:then cats}
+	<div class="{newGridClass}">
+		{#each cats as cat (cat)}
+		<PostCard>
+			<a rel='prefetch' href='{cat.title}'>
+				<img src="{cat.thumbnailUrl}" alt="{cat.title} thumbnail" class="{postCardThumbnailClass}" width="300" height="300">
+				<div class="{postCardTitleClass}">{cat.title} ({cat.nbItems})</div>
+			</a>
+		</PostCard>
+		{/each}
+	</div>
+{/await}

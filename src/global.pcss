@@ -7,22 +7,25 @@
 */
 @layer base {
   .body{
-    @apply font-body text-lg text-black;
+    @apply font-body text-lg text-black lowercase;
   }
   .body-bold{
-    @apply body font-bold; 
+    @apply body font-bold lowercase; 
+  }
+  .body::first-letter, .body-bold::first-letter{
+    @apply capitalize;
   }
   .description{
     @apply body text-base;
   }
   .title-category{
-    @apply body-bold text-base text-white;
+    @apply body-bold text-base py-4;
   }
   .title-channel{
-    @apply body-bold text-2xl text-white;
+    @apply body-bold text-2xl py-4;
   }
   .title-thumbnail{
-    @apply body text-base text-white;
+    @apply body text-base;
   }
 }
 
@@ -47,7 +50,7 @@ time, mark, audio, video {
   outline: 0;
   font-size: 100%;
   vertical-align: baseline;
-  background: transparent;
+  background-color: transparent;
 }
 
 article,aside,details,figcaption,figure,
@@ -90,5 +93,5 @@ input, select {
 * Awesome news app
 */
 body {
-  @apply body;
+  @apply body bg-gray-100;
 }
