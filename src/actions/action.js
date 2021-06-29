@@ -4,7 +4,7 @@ import { newsReducer } from '../reducer/postsReducer'
 /**
  * 
  * @param {object} postsListJson
- * @returns 
+ * @returns Categories list
  */
 export const getCatsList = (postsListJson) => {
     return newsReducer( {type: GET_CATS_LIST, payload: postsListJson})
@@ -12,8 +12,8 @@ export const getCatsList = (postsListJson) => {
 /**
  * 
  * @param {object} postsListJson
- * @returns 
+ * @returns Category posts list
  */
- export const getCatPostsList = (postsListJson) => {
-    return newsReducer( {type: GET_CAT_POSTS_LIST, payload: postsListJson})
+ export const getCatPostsList = (postsListJson, selectedCat) => {
+    return newsReducer( {type: GET_CAT_POSTS_LIST, payload: postsListJson, selectedCat: selectedCat})
 } 

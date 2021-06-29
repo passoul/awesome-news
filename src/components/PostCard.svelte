@@ -1,7 +1,6 @@
 <script>
 	import { postCardWrapperClass, postCardThumbnailClass, postCardTitleClass } from '../store/styleConst'; 
-    import { dafaultPostThumbnailUrl } from '../store/data'
-
+    import { dafaultPostThumbnailUrl } from '../store/data';
 </script>
 <div class="{postCardWrapperClass}">
     <slot>

@@ -31,7 +31,6 @@
 			{#each navLinks as { href, label } (href)}
 				<li><a href="{ href }" aria-current="{segment === href ? 'page' : undefined}" class="{navBarLinkClass}">{ label }</a></li>
 			{/each}
-			<li><a rel=prefetch aria-current="{segment === 'blog' ? 'page' : undefined}" href="blog">blog</a></li>
 		</ul>
 		{:else}
 			<p class="py-4">{ NAV_LINKS_EMPTY }</p>

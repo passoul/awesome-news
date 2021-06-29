@@ -1,20 +1,18 @@
 <script context="module">
+	import { getCatsList } from '../actions/action';
+
 	export function preload() {
 		return this.fetch(`index.json`).then(r => r.json()).then(posts => {
-			return { posts };
+			// Get all categories from posts
+			return { cats: getCatsList(posts) };
 		});
 	}
 </script>
 <script>
-	import { getCatsList } from '../actions/action';
 	import { LOADING_TEXT } from '../store/const'; 
 	import PostCard from '../components/PostCard.svelte'
-	import { newGridClass, postCardThumbnailClass, postCardTitleClass } from '../store/styleConst'; 
-	export let posts;
-	// Get all categories from posts
-	const cats = getCatsList(posts);
-
-    console.log("🚀 ~ file: index.svelte ~ line 13 ~ cats", cats)
+	import { newGridClass, postCardThumbnailClass, postCardCatTitleClass, postCardChildClass, postCardThumbnailHoverClass } from '../store/styleConst'; 
+	export let cats;
 	
 </script>
 <svelte:head>
@@ -25,11 +23,11 @@
 	<p>{LOADING_TEXT}</p>
 {:then cats}
 	<div class="{newGridClass}">
-		{#each cats as cat (cat)}
+		{#each cats as {title, thumbnailUrl, nbItems} (title)}
 		<PostCard>
-			<a rel='prefetch' href='{cat.title}'>
-				<img src="{cat.thumbnailUrl}" alt="{cat.title} thumbnail" class="{postCardThumbnailClass}" width="300" height="300">
-				<div class="{postCardTitleClass}">{cat.title} ({cat.nbItems})</div>
+			<a rel='prefetch' href='{title}' class="{postCardChildClass}">
+				<div class="overflow-hidden"><img src="{thumbnailUrl}" alt="{title} thumbnail" class="{postCardThumbnailClass} {postCardThumbnailHoverClass}" width="300" height="300"></div>
+				<div class="{postCardCatTitleClass}">{title} ({nbItems})</div>
 			</a>
 		</PostCard>
 		{/each}
